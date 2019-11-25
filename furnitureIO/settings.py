@@ -24,7 +24,7 @@ SECRET_KEY = 'ckw2m__)u^#2m@w0dy!(5ayqt4--jq7f891-v$r@uwr46o334f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://furnitureio.herokuapp.com/']
+ALLOWED_HOSTS = ['furnitureio.herokuapp.com']
 
 # Application definition
 
