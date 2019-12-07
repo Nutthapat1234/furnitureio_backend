@@ -24,7 +24,9 @@ SECRET_KEY = 'ckw2m__)u^#2m@w0dy!(5ayqt4--jq7f891-v$r@uwr46o334f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['furnitureio.herokuapp.com']
+URL = 'furnitureio.herokuapp.com'
+
+ALLOWED_HOSTS = [URL]
 
 # Application definition
 
@@ -130,8 +132,6 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MEDIA_URL = "/media/"
-
-URL = 'http://127.0.0.1:8000/'
 
 # Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (

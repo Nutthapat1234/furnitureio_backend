@@ -21,7 +21,7 @@ class ProductSerializer(serializers.ModelSerializer):
         response = instance.to_dict()
         response['images'] = []
         for image in ProductImage.objects.filter(productCode=instance.productCode):
-            response['images'].append(URL + 'media/Product/' + str(image))
+            response['images'].append(URL + 'media/' + str(image))
         if not response['images']:
             response['images'].append(URL + 'media/None/No-image.jpg')
 

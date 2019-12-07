@@ -27,8 +27,7 @@ router = routers.DefaultRouter()
 router.register("products", pa.ProductView, base_name="products")
 router.register("furnitureSet", fa.FurnitureSetView, base_name="furnitureSet")
 
-
 urlpatterns = [
-    path(r'admin/', admin.site.urls),
-    path(r'api/v1/', include(router.urls)),
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+                  path(r'admin/', admin.site.urls),
+                  path(r'api/v1/', include(router.urls)),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

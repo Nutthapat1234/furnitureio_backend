@@ -22,16 +22,16 @@ class ProductView(viewsets.ModelViewSet):
         detail = []
 
         try:
-            productSerializer = ProductSerializer(data=modifyRequest(data))
-            if productSerializer.is_valid():
-                productSerializer.save()
-                detail.append(productSerializer.data)
             for item in images:
                 imageData = {'productCode': productCode, 'image': item}
                 tempSerializer = ProductImageSerializer(data=imageData)
                 if tempSerializer.is_valid():
                     tempSerializer.save()
                     detail.append(tempSerializer.data)
+            productSerializer = ProductSerializer(data=modifyRequest(data))
+            if productSerializer.is_valid():
+                productSerializer.save()
+                detail.append(productSerializer.data)
             return Response(detail, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({'Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
