@@ -23,7 +23,7 @@ def suggestProduct(product, filter):
 
 
 def createAccessURL(bName, oName, expiration=1000):
-    s3_client = boto3.client('s3', config=boto3.session.Config(signature_version='s3v4'))
+    s3_client = boto3.client('s3', config=boto3.session.Config(signature_version='s3v4', region_name='us-east-2'))
     try:
         response = s3_client.generate_presigned_url('get_object',
                                                     Params={'Bucket': bName,
