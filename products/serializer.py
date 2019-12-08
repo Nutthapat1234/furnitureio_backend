@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from products.models import ProductModel, ProductImage
 from furnitureIO.settings import URL
-from helper import suggestProduct
+from helper import suggestProduct, createAccessURL
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -21,9 +21,9 @@ class ProductSerializer(serializers.ModelSerializer):
         response = instance.to_dict()
         response['images'] = []
         for image in ProductImage.objects.filter(productCode=instance.productCode):
-            response['images'].append(URL + 'media/' + str(image))
+            response['images'].append(createAccessURL("furnitureio",'media/' + str(image)))
         if not response['images']:
-            response['images'].append(URL + 'media/None/No-image.jpg')
+            response['images'].append(createAccessURL("furnitureio",'media/None/no-image.jpg'))
 
         relateDetail = instance.to_dict()
         relateDetail.pop("productCode")

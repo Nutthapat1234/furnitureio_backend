@@ -1,4 +1,6 @@
 from products.models import ProductModel
+import boto3
+from botocore.exceptions import ClientError
 
 
 def modifyRequest(data):
@@ -17,4 +19,18 @@ def suggestProduct(product, filter):
 
         relateItem.add(eval(filterStr))
 
-    print(relateItem)
+    # print(relateItem)
+
+
+def createAccessURL(bName, oName, expiration=1000):
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.generate_presigned_url('get_object',
+                                                    Params={'Bucket': bName,
+                                                            'Key': oName},
+                                                    ExpiresIn=expiration)
+    except ClientError as e:
+        print(e)
+        return None
+
+    return response
