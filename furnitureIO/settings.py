@@ -154,6 +154,7 @@ AWS_STORAGE_BUCKET_NAME = 'furnitureio'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.us-east-2.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_DEFAULT_ACL = None
 AWS_LOCATION = 'static'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
