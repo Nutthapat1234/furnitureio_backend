@@ -30,4 +30,5 @@ router.register("furnitureSet", fa.FurnitureSetView, base_name="furnitureSet")
 urlpatterns = [
                   path(r'admin/', admin.site.urls),
                   path(r'api/v1/', include(router.urls)),
+                  path('api-auth/', include('rest_framework.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

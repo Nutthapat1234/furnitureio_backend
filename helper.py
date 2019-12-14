@@ -19,7 +19,7 @@ def suggestProduct(product, filter):
 
         relateItem.add(eval(filterStr))
 
-    # print(relateItem)
+    print(relateItem)
 
 
 def createAccessURL(bName, oName, expiration=1000):
@@ -34,3 +34,5 @@ def createAccessURL(bName, oName, expiration=1000):
         return None
 
     return response
+
+

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
     'products',
     'furnitureSet',
@@ -81,12 +82,12 @@ WSGI_APPLICATION = 'furnitureIO.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'furnitureIO',
-        'USER': 'root',
-        'PASSWORD': 'admin',
-        'HOST': '127.0.0.1',  # Or an IP Address that your DB is hosted on
-        'PORT': '3000',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd673bnfcu1930u',
+        'USER': 'vfcsawkoavspjy',
+        'PASSWORD': 'abd1c0c967d59fdc13f862726b5d3b9d6e2169ad3d1631c49081ae14fb74ee20',
+        'HOST': 'ec2-107-22-195-114.compute-1.amazonaws.com',  # Or an IP Address that your DB is hosted on
+        'PORT': '5432',
     }
 }
 
@@ -107,6 +108,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# setting authentication of drf
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

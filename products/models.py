@@ -8,7 +8,7 @@ class ProductModel(models.Model):
     price = models.IntegerField(null=False, default=0)
     furnitureType = models.CharField(max_length=20, default=None)
     brand = models.CharField(max_length=20, default=None)
-    size = models.IntegerField(default=None)
+    size = models.CharField(max_length=20,default=None)
     color = models.CharField(max_length=10, default=None)
     description = models.CharField(max_length=255, default=None)
 
