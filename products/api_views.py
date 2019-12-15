@@ -13,7 +13,8 @@ class ProductView(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['productCode', 'name', 'price', 'furnitureType', 'brand', 'size', 'color', 'description']
     search_fields = ['name', 'brand', 'description']
-    ordering_fields = ['price', 'size']
+    ordering_fields = ['productCode', 'price', 'size']
+    ordering = ['productCode']
 
     def create(self, request, *args, **kwargs):
         data = dict(request.data)
