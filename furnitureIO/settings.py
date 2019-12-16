@@ -181,7 +181,9 @@ DEFAULT_FILE_STORAGE = 'furnitureIO.stroage_backend.MediaStorage'
 
 
 # CORS Setting
-from corsheaders.defaults import default_methods
+from corsheaders.defaults import default_methods, default_headers
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = list(default_methods)
+CORS_ALLOW_HEADERS = list(default_headers) + ['access-control-allow-origin']

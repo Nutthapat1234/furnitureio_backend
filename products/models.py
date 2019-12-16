@@ -4,13 +4,13 @@ from django.db import models
 # Create your models here.
 class ProductModel(models.Model):
     productCode = models.CharField(primary_key=True, max_length=10, null=False)
-    name = models.CharField(max_length=20, null=False, default="")
+    name = models.TextField(null=False, default="")
     price = models.IntegerField(null=False, default=0)
-    furnitureType = models.CharField(max_length=20, default=None)
-    brand = models.CharField(max_length=20, default=None)
-    size = models.CharField(max_length=20,default=None)
-    color = models.CharField(max_length=10, default=None)
-    description = models.CharField(max_length=255, default=None)
+    furnitureType = models.TextField(default=None)
+    brand = models.TextField(default=None)
+    size = models.TextField(default=None)
+    color = models.TextField(default=None)
+    description = models.TextField(default=None)
 
     def __str__(self):
         return self.name
