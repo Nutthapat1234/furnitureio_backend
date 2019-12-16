@@ -59,8 +59,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'furnitureIO.urls'
 
-CORS_ORIGIN_ALLOW_ALL = True
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -180,3 +178,10 @@ STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FILE_STORAGE = 'furnitureIO.stroage_backend.MediaStorage'
+
+
+# CORS Setting
+from corsheaders.defaults import default_methods
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = list(default_methods)
