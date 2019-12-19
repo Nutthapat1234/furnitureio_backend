@@ -27,6 +27,8 @@ class FurnitureSetSerializers(serializers.ModelSerializer):
     def to_representation(self, instance):
         response = {
             "furnitureSetCode": instance.furnitureSetCode,
+            "name": instance.name,
+            "price": instance.price,
             "roomType": instance.roomType,
             "description": instance.description,
             "itemList": [],
