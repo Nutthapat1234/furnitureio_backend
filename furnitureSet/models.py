@@ -4,6 +4,8 @@ from django.db import models
 # Create your models here.
 class FurnitureSetModel(models.Model):
     furnitureSetCode = models.CharField(primary_key=True, max_length=10, null=False)
+    name = models.TextField(default="RoomSet I")
+    price = models.IntegerField(default=0)
     roomType = models.TextField(default=None)
     description = models.TextField(default=None)
     itemList = models.TextField(default=None)
@@ -11,11 +13,12 @@ class FurnitureSetModel(models.Model):
     def to_dict(self):
         return {
             'furnituresetCode': self.furnitureSetCode,
+            'name': self.name,
+            'price': self.price,
             'description': self.description,
             'roomType': self.roomType,
             'itemList': self.itemList
         }
-
 
 
 class FurnitureImage(models.Model):
