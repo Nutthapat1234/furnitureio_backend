@@ -35,7 +35,7 @@ class FurnitureSetSerializers(serializers.ModelSerializer):
         for item in eval(instance.itemList):
             response['itemList'].append("https://" + URL + '/api/v1/products/' + item)
 
-        for image in FurnitureImage.objects.filter(productCode=instance.productCode):
+        for image in FurnitureImage.objects.filter(furnitureSetCode=instance.furnitureSetCode):
             response['images'].append(createAccessURL("furnitureio", 'media/' + str(image)))
         if not response['images']:
             response['images'].append(createAccessURL("furnitureio", 'media/None/no-image.jpg'))
@@ -50,4 +50,4 @@ class FurnitureImageSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def getProduct(code):
-        return FurnitureImage.objects.filter(productCode=code)
+        return FurnitureImage.objects.filter(furnitureSetCode=code)
