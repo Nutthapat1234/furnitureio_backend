@@ -1,8 +1,9 @@
 from rest_framework import viewsets, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from helper import modifyRequest
+from helper import modifyRequest, deleteObject
 from .models import ProductModel
 from .serializer import ProductSerializer, ProductImageSerializer
 
@@ -37,3 +38,20 @@ class ProductView(viewsets.ModelViewSet):
         except Exception as e:
             return Response({'Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+    def destroy(self, request, *args, **kwargs):
+        try:
+            code = request.data['productCode']
+            product = ProductSerializer.getProduct(code)
+            product.delete()
+            product.save()
+
+            productImages = ProductImageSerializer.getProduct(code)
+            for image in productImages:
+                deleteObject("furnitureio", 'media/' + str(image))
+                image.delete()
+                image.save()
+            print("Delete Success")
+            return Response([{"message": "Delete Product " + str(code)}], status=status.HTTP_200_OK)
+        except:
+            return Response([{"message": "Internal Error with Product " + str(code)}],
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)

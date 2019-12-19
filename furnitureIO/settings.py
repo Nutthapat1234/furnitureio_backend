@@ -26,6 +26,7 @@ DEBUG = True
 
 URL = 'furnitureio.herokuapp.com'
 
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition

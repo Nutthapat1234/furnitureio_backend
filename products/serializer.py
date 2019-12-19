@@ -15,21 +15,19 @@ class ProductSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def getProduct(code):
-        return ProductModel.objects.filter(productCode=code)
+        return ProductModel.objects.filter(productCode=code)[0]
 
     def to_representation(self, instance):
         response = instance.to_dict()
         response['images'] = []
         for image in ProductImage.objects.filter(productCode=instance.productCode):
-            response['images'].append(createAccessURL("furnitureio",'media/' + str(image)))
+            response['images'].append(createAccessURL("furnitureio", 'media/' + str(image)))
         if not response['images']:
-            response['images'].append(createAccessURL("furnitureio",'media/None/no-image.jpg'))
+            response['images'].append(createAccessURL("furnitureio", 'media/None/no-image.jpg'))
 
-        relateDetail = instance.to_dict()
-        relateDetail.pop("productCode")
-        relateDetail.pop("name")
-        relateDetail.pop("description")
-        suggestProduct(relateDetail, ProductModel.objects.filter)
+        suggest = suggestProduct(response["furnitureType"], ProductModel.objects.filter)
+
+        response['suggestItem'] = suggest
 
         return response
 
@@ -38,3 +36,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
         fields = ('productCode', 'image')
+
+    @staticmethod
+    def getProduct(code):
+        return ProductImage.objects.filter(productCode=code)

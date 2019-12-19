@@ -13,7 +13,7 @@ class ProductModel(models.Model):
     description = models.TextField(default=None)
 
     def __str__(self):
-        return self.name
+        return self.productCode
 
     def getCode(self):
         return self.productCode

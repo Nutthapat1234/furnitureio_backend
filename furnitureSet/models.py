@@ -4,15 +4,19 @@ from django.db import models
 # Create your models here.
 class FurnitureSetModel(models.Model):
     furnitureSetCode = models.CharField(primary_key=True, max_length=10, null=False)
-    description = models.CharField(max_length=255, default=None)
-    itemList = models.CharField(max_length=255, default=None)
+    roomType = models.TextField(default=None)
+    description = models.TextField(default=None)
+    itemList = models.TextField(default=None)
 
     def to_dict(self):
         return {
             'furnituresetCode': self.furnitureSetCode,
             'description': self.description,
+            'roomType': self.roomType,
             'itemList': self.itemList
         }
+
+
 
 class FurnitureImage(models.Model):
     auto_id = models.AutoField(primary_key=True)

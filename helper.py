@@ -1,7 +1,13 @@
+import random
+
+from furnitureIO.settings import URL
 from products.models import ProductModel
 import boto3
 from botocore.exceptions import ClientError
 import requests
+
+s3_client = boto3.client('s3', config=boto3.session.Config(signature_version='s3v4', region_name='us-east-2'))
+
 
 def modifyRequest(data):
     modified = {}
@@ -11,7 +17,6 @@ def modifyRequest(data):
 
 
 def createAccessURL(bName, oName, expiration=1000):
-    s3_client = boto3.client('s3', config=boto3.session.Config(signature_version='s3v4', region_name='us-east-2'))
     try:
         response = s3_client.generate_presigned_url('get_object',
                                                     Params={'Bucket': bName,
@@ -24,18 +29,24 @@ def createAccessURL(bName, oName, expiration=1000):
     return response
 
 
-def suggestProduct(product, filter):
-    relateItem = set()
-    for key, value in product.items():
-        filterStr = 'filter(' + key + '="' + str(value) + '")'
-        if key == 'price':
-            filterStr = "filter(price__range=(" + str(value - 500) + "," + str(value + 500) + "))"
-
-        item = eval(filterStr)
-
-        relateItem = relateItem.union(set(item))
+def deleteObject(bName, oName):
+    try:
+        response = s3_client.delete_object(Bucket=bName, Key=oName)
+    except ClientError as e:
+        print(e)
+        return None
 
 
-
-def generateLink(productCode):
-    link = ""
+def suggestProduct(fType, filter):
+    filterStr = 'filter(furnitureType="' + fType + '")'
+    items = eval(filterStr)
+    itemURL = []
+    print(items)
+    if len(items) < 5:
+        for i in items:
+            itemURL.append("https://" + URL + "/api/v1/products/" + str(i))
+    else:
+        randomItems = random.choices(items, k=5)
+        for i in randomItems:
+            itemURL.append("https://" + URL + "/api/v1/products/" + str(i))
+    return itemURL
