@@ -14,7 +14,7 @@ class FurnitureSetView(viewsets.ModelViewSet):
     queryset = FurnitureSetModel.objects.all()
     serializer_class = FurnitureSetSerializers
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['furnitureSetCode']
+    filterset_fields = ['furnitureSetCode','roomType']
 
     @action(methods=['get'], detail=True, url_path='items')
     def getItems(self, request, pk=None):
