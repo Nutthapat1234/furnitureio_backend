@@ -39,8 +39,8 @@ class ProductView(viewsets.ModelViewSet):
             return Response({'Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, *args, **kwargs):
+        code = request.data['productCode']
         try:
-            code = request.data['productCode']
             product = ProductSerializer.getProduct(code)
             product.delete()
             product.save()
