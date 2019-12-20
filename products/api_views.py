@@ -39,19 +39,19 @@ class ProductView(viewsets.ModelViewSet):
             return Response({'Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, *args, **kwargs):
-        code = request.data['productCode']
+        product = self.get_object()
+        code = product.getCode()
         try:
-            product = ProductSerializer.getProduct(code)
+            product = self.get_object()
             product.delete()
-            product.save()
 
             productImages = ProductImageSerializer.getProduct(code)
             for image in productImages:
                 deleteObject("furnitureio", 'media/' + str(image))
                 image.delete()
-                image.save()
+
             print("Delete Success")
-            return Response([{"message": "Delete Product " + str(code)}], status=status.HTTP_200_OK)
+            return Response([{"message": "Delete Product " + code}], status=status.HTTP_200_OK)
         except:
-            return Response([{"message": "Internal Error with Product " + str(code)}],
+            return Response([{"message": "Internal Error with product" + code}],
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR)

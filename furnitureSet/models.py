@@ -20,6 +20,8 @@ class FurnitureSetModel(models.Model):
             'itemList': self.itemList
         }
 
+    def getCode(self):
+        return self.furnitureSetCode
 
 class FurnitureImage(models.Model):
     auto_id = models.AutoField(primary_key=True)

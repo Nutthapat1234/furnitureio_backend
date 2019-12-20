@@ -54,9 +54,9 @@ class FurnitureSetView(viewsets.ModelViewSet):
             return Response({'Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, *args, **kwargs):
-        code = request.data['productCode']
+        product = self.get_object()
+        code = product.getCode()
         try:
-            product = FurnitureSetSerializers.getProduct(code)
             product.delete()
             product.save()
 
@@ -66,7 +66,7 @@ class FurnitureSetView(viewsets.ModelViewSet):
                 image.delete()
                 image.save()
             print("Delete Success")
-            return Response([{"message": "Delete FurnitureSet " + str(code)}], status=status.HTTP_200_OK)
+            return Response([{"message": "Delete FurnitureSet " + code}], status=status.HTTP_200_OK)
         except:
-            return Response([{"message": "Internal Error with Product " + str(code)}],
+            return Response([{"message": "Internal Error with Product " + code}],
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR)

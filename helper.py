@@ -41,7 +41,6 @@ def suggestProduct(fType, filter):
     filterStr = 'filter(furnitureType="' + fType + '")'
     items = eval(filterStr)
     itemURL = []
-    print(items)
     if len(items) < 5:
         for i in items:
             itemURL.append("https://" + URL + "/api/v1/products/" + str(i))
