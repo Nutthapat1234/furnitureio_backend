@@ -58,13 +58,12 @@ class FurnitureSetView(viewsets.ModelViewSet):
         code = product.getCode()
         try:
             product.delete()
-            product.save()
 
             furnitureImages = FurnitureImageSerializer.getProduct(code)
             for image in furnitureImages:
                 deleteObject("furnitureio", 'media/' + str(image))
                 image.delete()
-                image.save()
+
             print("Delete Success")
             return Response([{"message": "Delete FurnitureSet " + code}], status=status.HTTP_200_OK)
         except:
