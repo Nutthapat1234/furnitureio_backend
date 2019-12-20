@@ -8,7 +8,7 @@ import json
 class FurnitureSetSerializers(serializers.ModelSerializer):
     class Meta:
         model = FurnitureSetModel
-        fields = ('furnitureSetCode', 'description', 'itemList', 'roomType')
+        fields = ('furnitureSetCode', 'description', 'itemList', 'roomType','name')
 
     @staticmethod
     def getProduct(code):
