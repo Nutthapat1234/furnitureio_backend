@@ -26,7 +26,6 @@ DEBUG = True
 
 URL = 'furnitureio.herokuapp.com'
 
-
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     'products',
     'furnitureSet',
     'storages',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +120,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
 # Internationalization
@@ -179,7 +180,6 @@ STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FILE_STORAGE = 'furnitureIO.stroage_backend.MediaStorage'
-
 
 # CORS Setting
 from corsheaders.defaults import default_methods, default_headers

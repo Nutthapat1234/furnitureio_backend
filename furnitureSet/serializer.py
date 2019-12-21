@@ -15,6 +15,7 @@ class FurnitureSetSerializers(serializers.ModelSerializer):
         return FurnitureSetModel.objects.filter(productCode=code)[0]
 
     def to_internal_value(self, data):
+        print(data.get("itemList"))
         itemList = json.dumps(data.get("itemList").split(","))
         validated = {
             "furnitureSetCode": data.get("furnitureSetCode"),

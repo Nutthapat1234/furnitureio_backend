@@ -23,12 +23,17 @@ from rest_framework import routers
 from products import api_views as pa
 from furnitureSet import api_views as fa
 
+from rest_framework_swagger.views import get_swagger_view
+
 router = routers.DefaultRouter()
 router.register("products", pa.ProductView, base_name="products")
 router.register("furnitureSet", fa.FurnitureSetView, base_name="furnitureSet")
+
+schema_view = get_swagger_view(title="furnitureIO API")
 
 urlpatterns = [
                   path(r'admin/', admin.site.urls),
                   path(r'api/v1/', include(router.urls)),
                   path('api-auth/', include('rest_framework.urls')),
+                  path(r'document/',schema_view),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
