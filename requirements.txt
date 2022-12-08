@@ -33,7 +33,7 @@ whitenoise==4.1.4
 awscli==1.16.298
 boto3==1.10.34
 botocore==1.13.34
-certifi==2019.11.28
+certifi==2022.12.7
 chardet==3.0.4
 colorama==0.4.1
 construct==2.5.3
